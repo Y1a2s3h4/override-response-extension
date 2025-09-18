@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requestly</title>
+    <link rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <header class="popup-header">
+            <h1>🔄 Requestly</h1>
+            <label class="toggle-switch">
+                <input type="checkbox" id="extensionToggle">
+                <span class="slider"></span>
+            </label>
+        </header>
+
+        <div class="status-section">
+            <div class="status-item">
+                <span class="status-label">Status:</span>
+                <span id="extensionStatus" class="status-value">Loading...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Active Rules:</span>
+                <span id="rulesCount" class="status-value">0</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Recent Hits:</span>
+                <span id="recentHits" class="status-value">0</span>
+            </div>
+        </div>
+
+        <div class="recent-logs">
+            <h3>Recent Activity</h3>
+            <div id="logsList" class="logs-list">
+                <!-- Logs will be populated here -->
+            </div>
+            <div id="noLogs" class="empty-message" style="display: none;">
+                No recent activity
+            </div>
+        </div>
+
+        <div class="popup-actions">
+            <button id="openOptionsBtn" class="btn btn-primary">
+                ⚙️ Manage Rules
+            </button>
+            <button id="clearLogsBtn" class="btn btn-secondary">
+                🗑️ Clear Logs
+            </button>
+        </div>
+
+        <div class="popup-footer">
+            <div class="version">v1.0.0</div>
+            <div class="links">
+                <a href="#" id="helpLink">Help</a>
+                <a href="#" id="feedbackLink">Feedback</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/popup.js"></script>
+</body>
+</html>

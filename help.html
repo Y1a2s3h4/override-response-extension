@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requestly - Help</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #667eea; }
+        h2 { color: #333; border-bottom: 2px solid #e9ecef; padding-bottom: 0.5rem; }
+        .code { background: #f8f9fa; padding: 1rem; border-radius: 4px; font-family: 'Monaco', 'Consolas', monospace; }
+        .highlight { background: #fff3cd; padding: 0.5rem; border-radius: 4px; }
+        .btn { background: #667eea; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 Requestly Help</h1>
+        
+        <h2>Quick Start</h2>
+        <ol>
+            <li><strong>Enable Extension:</strong> Click the Requestly icon and toggle it ON</li>
+            <li><strong>Add Rule:</strong> Right-click icon → Options → Add Rule</li>
+            <li><strong>Configure:</strong> Set URL pattern and action type</li>
+            <li><strong>Test:</strong> Visit your website and check the logs</li>
+        </ol>
+
+        <h2>URL Patterns</h2>
+        <ul>
+            <li><strong>Exact:</strong> <code>https://api.example.com/users</code></li>
+            <li><strong>Prefix:</strong> <code>https://api.example.com/</code></li>
+            <li><strong>Regex:</strong> <code>https://api\.example\.com/users/\d+</code></li>
+        </ul>
+
+        <h2>Action Types</h2>
+        <ul>
+            <li><strong>Replace:</strong> Replace entire response with custom JSON</li>
+            <li><strong>Patch:</strong> Modify specific fields (e.g., <code>user.name</code>)</li>
+            <li><strong>Delay:</strong> Add artificial latency in milliseconds</li>
+            <li><strong>Status:</strong> Force specific HTTP status codes</li>
+        </ul>
+
+        <h2>Common Use Cases</h2>
+        <div class="highlight">
+            <p><strong>Testing:</strong> Mock API responses during development</p>
+            <p><strong>Feature Flags:</strong> Enable/disable features dynamically</p>
+            <p><strong>Error Simulation:</strong> Test error handling with forced errors</p>
+            <p><strong>Performance:</strong> Simulate slow networks with delays</p>
+        </div>
+
+        <h2>Troubleshooting</h2>
+        <ul>
+            <li><strong>Rule not working?</strong> Check URL pattern matches exactly</li>
+            <li><strong>JSON errors?</strong> Use the Format JSON button to validate</li>
+            <li><strong>Can't see logs?</strong> Refresh the page after adding rules</li>
+        </ul>
+
+        <h2>Need More Help?</h2>
+        <p>
+            <a href="https://github.com/your-repo/requestly-extension" class="btn">📖 Full Documentation</a>
+            <a href="https://github.com/your-repo/requestly-extension/issues" class="btn">🐛 Report Issues</a>
+        </p>
+
+        <hr>
+        <p style="text-align: center; color: #666; font-size: 0.9rem;">
+            Requestly v1.0.0 | Made with ❤️ for developers
+        </p>
+    </div>
+</body>
+</html>

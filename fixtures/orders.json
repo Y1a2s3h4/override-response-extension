@@ -1,0 +1,81 @@
+{
+  "data": [
+    {
+      "id": "order_123",
+      "userId": "user_456",
+      "status": "completed",
+      "total": 149.99,
+      "currency": "USD",
+      "items": [
+        {
+          "id": "item_789",
+          "name": "Wireless Headphones",
+          "quantity": 1,
+          "price": 149.99,
+          "sku": "WH-001"
+        }
+      ],
+      "shipping": {
+        "address": {
+          "street": "123 Main St",
+          "city": "San Francisco",
+          "state": "CA",
+          "zipCode": "94105",
+          "country": "US"
+        },
+        "method": "standard",
+        "trackingNumber": "1Z999AA1234567890"
+      },
+      "payment": {
+        "method": "credit_card",
+        "last4": "4242",
+        "brand": "visa"
+      },
+      "createdAt": "2024-01-15T10:30:00Z",
+      "updatedAt": "2024-01-15T14:22:00Z"
+    },
+    {
+      "id": "order_124",
+      "userId": "user_456",
+      "status": "pending",
+      "total": 89.99,
+      "currency": "USD",
+      "items": [
+        {
+          "id": "item_790",
+          "name": "Bluetooth Speaker",
+          "quantity": 1,
+          "price": 89.99,
+          "sku": "BS-002"
+        }
+      ],
+      "shipping": {
+        "address": {
+          "street": "123 Main St",
+          "city": "San Francisco",
+          "state": "CA",
+          "zipCode": "94105",
+          "country": "US"
+        },
+        "method": "express",
+        "trackingNumber": null
+      },
+      "payment": {
+        "method": "paypal",
+        "email": "user@example.com"
+      },
+      "createdAt": "2024-01-16T09:15:00Z",
+      "updatedAt": "2024-01-16T09:15:00Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "total": 2,
+    "totalPages": 1
+  },
+  "meta": {
+    "currency": "USD",
+    "timezone": "UTC"
+  }
+}

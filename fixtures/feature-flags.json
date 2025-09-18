@@ -1,0 +1,41 @@
+{
+  "flags": {
+    "new_dashboard": {
+      "enabled": true,
+      "rollout": 75,
+      "description": "New dashboard UI with improved analytics"
+    },
+    "beta_features": {
+      "enabled": false,
+      "rollout": 0,
+      "description": "Access to beta features and experimental functionality"
+    },
+    "premium_chat": {
+      "enabled": true,
+      "rollout": 100,
+      "description": "24/7 premium customer support chat"
+    },
+    "advanced_search": {
+      "enabled": true,
+      "rollout": 50,
+      "description": "Enhanced search with filters and sorting"
+    },
+    "dark_mode": {
+      "enabled": true,
+      "rollout": 100,
+      "description": "Dark theme support"
+    },
+    "mobile_app_promotion": {
+      "enabled": false,
+      "rollout": 25,
+      "description": "Promotion banner for mobile app download"
+    }
+  },
+  "user": {
+    "id": "user_456",
+    "segment": "premium",
+    "cohort": "2023-q2"
+  },
+  "environment": "production",
+  "lastUpdated": "2024-01-16T10:00:00Z"
+}

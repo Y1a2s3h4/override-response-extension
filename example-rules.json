@@ -1,0 +1,164 @@
+{
+  "rules": [
+    {
+      "id": "rule_1",
+      "name": "Replace Orders API Response",
+      "description": "Replace orders API with mock data for testing",
+      "enabled": true,
+      "matcher": {
+        "url": {
+          "type": "prefix",
+          "value": "https://dev.example.com/api/orders"
+        },
+        "method": "GET"
+      },
+      "action": {
+        "type": "replace",
+        "response": {
+          "data": [
+            {
+              "id": "order_123",
+              "status": "completed",
+              "total": 149.99,
+              "items": [
+                {
+                  "name": "Wireless Headphones",
+                  "price": 149.99
+                }
+              ]
+            }
+          ]
+        },
+        "statusCode": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "id": "rule_2",
+      "name": "Enable Beta Features Flag",
+      "description": "Force enable beta features for testing",
+      "enabled": true,
+      "matcher": {
+        "url": {
+          "type": "exact",
+          "value": "https://dev.example.com/api/feature-flags"
+        },
+        "method": "GET"
+      },
+      "action": {
+        "type": "patch",
+        "patches": [
+          {
+            "path": "flags.beta_features.enabled",
+            "value": true
+          },
+          {
+            "path": "flags.beta_features.rollout",
+            "value": 100
+          }
+        ],
+        "statusCode": 200
+      }
+    },
+    {
+      "id": "rule_3",
+      "name": "Simulate Slow API Response",
+      "description": "Add 2 second delay to reports API to test loading states",
+      "enabled": false,
+      "matcher": {
+        "url": {
+          "type": "regex",
+          "value": "https://dev\\.example\\.com/api/reports.*"
+        },
+        "method": "GET"
+      },
+      "action": {
+        "type": "delay",
+        "delay": 2000
+      }
+    },
+    {
+      "id": "rule_4",
+      "name": "Force Authentication Error",
+      "description": "Simulate 401 authentication error for testing error handling",
+      "enabled": false,
+      "matcher": {
+        "url": {
+          "type": "exact",
+          "value": "https://dev.example.com/api/login"
+        },
+        "method": "POST"
+      },
+      "action": {
+        "type": "status",
+        "statusCode": 401,
+        "response": {
+          "error": {
+            "code": "UNAUTHORIZED",
+            "message": "Invalid credentials",
+            "details": "The provided email or password is incorrect"
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "id": "rule_5",
+      "name": "Mock User Profile Data",
+      "description": "Replace user profile with test data",
+      "enabled": true,
+      "matcher": {
+        "url": {
+          "type": "regex",
+          "value": "https://dev\\.example\\.com/api/users/[0-9]+"
+        },
+        "method": "GET"
+      },
+      "action": {
+        "type": "replace",
+        "response": {
+          "id": "user_test",
+          "email": "test.user@example.com",
+          "firstName": "Test",
+          "lastName": "User",
+          "role": "admin",
+          "subscription": {
+            "plan": "premium",
+            "status": "active"
+          }
+        },
+        "statusCode": 200
+      }
+    },
+    {
+      "id": "rule_6",
+      "name": "Simulate Server Error",
+      "description": "Force 500 error for error boundary testing",
+      "enabled": false,
+      "matcher": {
+        "url": {
+          "type": "prefix",
+          "value": "https://dev.example.com/api/dashboard"
+        },
+        "method": "GET"
+      },
+      "action": {
+        "type": "status",
+        "statusCode": 500,
+        "response": {
+          "error": {
+            "code": "INTERNAL_SERVER_ERROR",
+            "message": "Something went wrong"
+          }
+        }
+      }
+    }
+  ],
+  "exportDate": "2024-01-16T12:00:00Z",
+  "version": "1.0",
+  "description": "Example rules for common API testing scenarios"
+}

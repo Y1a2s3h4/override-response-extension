@@ -1,0 +1,76 @@
+{
+  "data": [
+    {
+      "id": "user_456",
+      "email": "john.doe@example.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john.doe@example.com",
+      "role": "customer",
+      "status": "active",
+      "preferences": {
+        "notifications": {
+          "email": true,
+          "push": false,
+          "sms": true
+        },
+        "theme": "light",
+        "language": "en"
+      },
+      "subscription": {
+        "plan": "premium",
+        "status": "active",
+        "expiresAt": "2024-12-31T23:59:59Z"
+      },
+      "address": {
+        "street": "123 Main St",
+        "city": "San Francisco",
+        "state": "CA",
+        "zipCode": "94105",
+        "country": "US"
+      },
+      "createdAt": "2023-06-15T08:30:00Z",
+      "updatedAt": "2024-01-10T16:45:00Z",
+      "lastLoginAt": "2024-01-16T12:00:00Z"
+    },
+    {
+      "id": "user_789",
+      "email": "jane.smith@example.com",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane.smith@example.com",
+      "role": "admin",
+      "status": "active",
+      "preferences": {
+        "notifications": {
+          "email": true,
+          "push": true,
+          "sms": false
+        },
+        "theme": "dark",
+        "language": "en"
+      },
+      "subscription": {
+        "plan": "enterprise",
+        "status": "active",
+        "expiresAt": "2025-06-30T23:59:59Z"
+      },
+      "address": {
+        "street": "456 Oak Ave",
+        "city": "New York",
+        "state": "NY",
+        "zipCode": "10001",
+        "country": "US"
+      },
+      "createdAt": "2023-03-20T14:20:00Z",
+      "updatedAt": "2024-01-15T09:30:00Z",
+      "lastLoginAt": "2024-01-16T08:15:00Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "total": 2,
+    "totalPages": 1
+  }
+}

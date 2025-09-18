@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requestly - Options</title>
+    <link rel="stylesheet" href="css/options.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🔄 Requestly</h1>
+            <p>API Response Interceptor & Modifier</p>
+            <div class="header-actions">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="extensionToggle">
+                    <span class="slider"></span>
+                    <span class="toggle-label">Extension Enabled</span>
+                </label>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="rules">Rules</button>
+            <button class="tab-btn" data-tab="logs">Logs</button>
+            <button class="tab-btn" data-tab="settings">Settings</button>
+        </nav>
+
+        <!-- Rules Tab -->
+        <div id="rules" class="tab-content active">
+            <div class="rules-header">
+                <h2>Interception Rules</h2>
+                <div class="rules-actions">
+                    <button id="addRuleBtn" class="btn btn-primary">+ Add Rule</button>
+                    <button id="importRulesBtn" class="btn btn-secondary">Import</button>
+                    <button id="exportRulesBtn" class="btn btn-secondary">Export</button>
+                </div>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" id="ruleSearch" placeholder="Search rules..." class="search-input">
+                <select id="ruleFilter" class="filter-select">
+                    <option value="all">All Rules</option>
+                    <option value="enabled">Enabled Only</option>
+                    <option value="disabled">Disabled Only</option>
+                </select>
+            </div>
+
+            <div id="rulesList" class="rules-list">
+                <!-- Rules will be populated here -->
+            </div>
+
+            <div id="noRules" class="empty-state" style="display: none;">
+                <p>No rules created yet. Click "Add Rule" to get started!</p>
+            </div>
+        </div>
+
+        <!-- Logs Tab -->
+        <div id="logs" class="tab-content">
+            <div class="logs-header">
+                <h2>Request Logs</h2>
+                <div class="logs-actions">
+                    <button id="clearLogsBtn" class="btn btn-secondary">Clear Logs</button>
+                    <button id="refreshLogsBtn" class="btn btn-secondary">Refresh</button>
+                </div>
+            </div>
+
+            <div id="logsList" class="logs-list">
+                <!-- Logs will be populated here -->
+            </div>
+
+            <div id="noLogs" class="empty-state" style="display: none;">
+                <p>No requests intercepted yet.</p>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-content">
+            <div class="settings-section">
+                <h2>General Settings</h2>
+                
+                <div class="setting-item">
+                    <label for="maxLogs">Maximum Log Entries:</label>
+                    <input type="number" id="maxLogs" min="100" max="10000" value="1000">
+                </div>
+
+                <div class="setting-item">
+                    <label for="allowedDomains">Allowed Domains (one per line):</label>
+                    <textarea id="allowedDomains" placeholder="example.com&#10;api.example.com&#10;*.dev-domain.com"></textarea>
+                </div>
+
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="maskSensitiveData">
+                        Mask sensitive data in logs
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-actions">
+                <button id="saveSettingsBtn" class="btn btn-primary">Save Settings</button>
+                <button id="resetSettingsBtn" class="btn btn-danger">Reset to Defaults</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rule Modal -->
+    <div id="ruleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Rule</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="ruleForm">
+                    <div class="form-group">
+                        <label for="ruleName">Rule Name:</label>
+                        <input type="text" id="ruleName" required>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Request Matcher</h4>
+                        
+                        <div class="form-group">
+                            <label for="urlPattern">URL Pattern:</label>
+                            <select id="urlType">
+                                <option value="prefix">Starts with</option>
+                                <option value="exact">Exact match</option>
+                                <option value="regex">Regex</option>
+                            </select>
+                            <input type="text" id="urlPattern" placeholder="https://api.example.com/" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="httpMethod">HTTP Method:</label>
+                            <select id="httpMethod">
+                                <option value="">Any</option>
+                                <option value="GET">GET</option>
+                                <option value="POST">POST</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELETE</option>
+                                <option value="PATCH">PATCH</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Action</h4>
+                        
+                        <div class="form-group">
+                            <label for="actionType">Action Type:</label>
+                            <select id="actionType">
+                                <option value="replace">Replace Response</option>
+                                <option value="patch">Patch Response</option>
+                                <option value="delay">Add Delay</option>
+                                <option value="status">Change Status</option>
+                            </select>
+                        </div>
+
+                        <div id="responseEditor" class="form-group">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <label for="responseType">Response Type:</label>
+                                    <select id="responseType">
+                                        <option value="json">JSON</option>
+                                        <option value="text">Plain Text</option>
+                                        <option value="html">HTML</option>
+                                        <option value="xml">XML</option>
+                                        <option value="javascript">JavaScript</option>
+                                        <option value="css">CSS</option>
+                                    </select>
+                                </div>
+                                <div class="form-col">
+                                    <label for="customContentType">Custom Content-Type (optional):</label>
+                                    <input type="text" id="customContentType" placeholder="application/json">
+                                </div>
+                            </div>
+                            <label for="responseBody">Response Body:</label>
+                            <textarea id="responseBody" placeholder='Enter your response content here...'></textarea>
+                            <div class="response-actions">
+                                <button type="button" id="formatJsonBtn" class="btn btn-small">Format JSON</button>
+                                <button type="button" id="loadTemplateBtn" class="btn btn-small">Load Template</button>
+                                <button type="button" id="validateBtn" class="btn btn-small">Validate</button>
+                            </div>
+                        </div>
+
+                        <div id="patchEditor" class="form-group" style="display: none;">
+                            <label>JSON Patches:</label>
+                            <div id="patchesList">
+                                <!-- Patches will be added here -->
+                            </div>
+                            <button type="button" id="addPatchBtn" class="btn btn-small">Add Patch</button>
+                        </div>
+
+                        <div id="delayEditor" class="form-group" style="display: none;">
+                            <label for="delayMs">Delay (milliseconds):</label>
+                            <input type="number" id="delayMs" min="0" max="30000" value="1000">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="statusCode">Status Code:</label>
+                            <input type="number" id="statusCode" min="100" max="599" value="200">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="testRuleBtn">Test Rule</button>
+                        <button type="submit" class="btn btn-primary">Save Rule</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+
+    <script src="js/options.js"></script>
+</body>
+</html>
