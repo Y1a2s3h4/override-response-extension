@@ -43,12 +43,12 @@ class PopupPage {
     const recentHits = document.getElementById('recentHits');
 
     toggle.checked = this.status.isEnabled;
-    
+
     statusElement.textContent = this.status.isEnabled ? 'Enabled' : 'Disabled';
     statusElement.className = `status-value ${this.status.isEnabled ? 'enabled' : 'disabled'}`;
-    
+
     rulesCount.textContent = this.status.rulesCount || 0;
-    
+
     const recentLogsCount = (this.status.logs || []).filter(
       log => Date.now() - log.timestamp < 24 * 60 * 60 * 1000
     ).length;
@@ -75,7 +75,7 @@ class PopupPage {
     logsList.innerHTML = recentLogs.map(log => {
       const isError = log.responseStatus >= 400;
       const timeAgo = this.timeAgo(log.timestamp);
-      
+
       return `
         <div class="log-item ${isError ? 'error' : 'success'}">
           <div class="log-timestamp">${timeAgo}</div>
@@ -94,7 +94,7 @@ class PopupPage {
       const result = await this.sendMessage({ type: 'TOGGLE_EXTENSION' });
       this.status.isEnabled = result.isEnabled;
       this.updateUI();
-      
+
       this.showNotification(
         result.isEnabled ? 'Extension enabled' : 'Extension disabled'
       );
@@ -133,7 +133,7 @@ class PopupPage {
   openFeedback(e) {
     e.preventDefault();
     chrome.tabs.create({
-      url: 'https://github.com/your-repo/requestly/issues'
+      url: 'https://github.com/your-repo/override-response-extension/issues'
     });
     window.close();
   }
@@ -174,9 +174,9 @@ class PopupPage {
       background: ${type === 'error' ? '#f44336' : '#4caf50'};
       animation: slideDown 0.3s ease-out;
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
       notification.remove();
     }, 2000);
@@ -188,16 +188,16 @@ class PopupPage {
 
   truncateUrl(url) {
     if (url.length <= 40) return this.escapeHtml(url);
-    
+
     try {
       const urlObj = new URL(url);
       const domain = urlObj.hostname;
       const path = urlObj.pathname + urlObj.search;
-      
+
       if (domain.length + path.length <= 37) {
         return this.escapeHtml(`${domain}${path}`);
       }
-      
+
       return this.escapeHtml(`${domain}${path.substring(0, 37 - domain.length)}...`);
     } catch (e) {
       return this.escapeHtml(url.substring(0, 37) + '...');
@@ -206,15 +206,15 @@ class PopupPage {
 
   timeAgo(timestamp) {
     const seconds = Math.floor((Date.now() - timestamp) / 1000);
-    
+
     if (seconds < 60) return `${seconds}s ago`;
-    
+
     const minutes = Math.floor(seconds / 60);
     if (minutes < 60) return `${minutes}m ago`;
-    
+
     const hours = Math.floor(minutes / 60);
     if (hours < 24) return `${hours}h ago`;
-    
+
     const days = Math.floor(hours / 24);
     return `${days}d ago`;
   }

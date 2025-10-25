@@ -1,4 +1,4 @@
-# 🧪 Testing Guide for Requestly Extension
+# 🧪 Testing Guide for Override Response Extension
 
 ## Pre-Installation Testing
 
@@ -9,7 +9,7 @@ Create a simple HTML page with API calls to test the extension:
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Requestly Test Page</title>
+    <title>Override Response Test Page</title>
 </head>
 <body>
     <h1>API Test Page</h1>
@@ -44,7 +44,7 @@ Create a simple HTML page with API calls to test the extension:
 **Expected Result:** Extension loads without errors
 
 ### Step 2: Basic UI Test
-1. Click the Requestly icon in toolbar
+1. Click the Override Response icon in toolbar
 2. Verify popup opens
 3. Check extension status shows "Disabled" initially
 4. Toggle extension ON
@@ -69,7 +69,7 @@ Create a simple HTML page with API calls to test the extension:
    - Name: "Test JSONPlaceholder"
    - URL: `https://jsonplaceholder.typicode.com/posts/1` (exact)
    - Action: Replace
-   - Response: `{"title": "Intercepted!", "body": "This response was modified by Requestly"}`
+   - Response: `{"title": "Intercepted!", "body": "This response was modified by Override Response"}`
 4. Save rule
 5. Open test HTML page
 6. Click "Test API Call"

@@ -1,4 +1,4 @@
-# 📦 Requestly Installation Guide
+# 📦 Override Response Installation Guide
 
 ## Quick Installation (5 minutes)
 
@@ -18,10 +18,10 @@
 
 ### Step 4: Pin the Extension (Recommended)
 1. Click the **puzzle piece icon** (🧩) in Chrome's toolbar
-2. Find "Requestly" and click the **pin icon** to keep it visible
+2. Find "Override Response" and click the **pin icon** to keep it visible
 
 ### Step 5: Test the Installation
-1. Click the **Requestly icon** in your toolbar
+1. Click the **Override Response icon** in your toolbar
 2. You should see the popup with extension status
 3. Toggle the extension **ON**
 
@@ -30,7 +30,7 @@
 The extension is now installed and ready to use. 
 
 ### Next Steps:
-- Right-click the Requestly icon → **"Options"** to manage rules
+- Right-click the Override Response icon → **"Options"** to manage rules
 - Import `example-rules.json` to get started with sample rules
 - Visit the **Help** page for usage instructions
 

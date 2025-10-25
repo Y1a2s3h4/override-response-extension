@@ -1,6 +1,6 @@
-# Requestly - API Response Interceptor
+# Override Response - API Response Interceptor
 
-**Requestly** is a Chrome extension that allows developers and QA engineers to intercept and modify API responses in real-time. Perfect for testing, debugging, and simulating backend scenarios without server changes.
+**Override Response** is a Chrome extension that allows developers and QA engineers to intercept and modify API responses in real-time. Perfect for testing, debugging, and simulating backend scenarios without server changes.
 
 ## 🚀 Features
 
@@ -34,8 +34,8 @@
 
 1. **Download the Extension**
    ```bash
-   git clone https://github.com/your-repo/requestly-extension.git
-   cd requestly-extension
+   git clone https://github.com/your-repo/override-response-extension.git
+   cd override-response-extension
    ```
 
 2. **Open Chrome Extensions Page**
@@ -44,12 +44,12 @@
 
 3. **Load the Extension**
    - Click "Load unpacked"
-   - Select the `requestly-extension` folder
+   - Select the `override-response-extension` folder
    - The extension should now appear in your extensions list
 
 4. **Pin the Extension** (Optional)
    - Click the puzzle piece icon in Chrome toolbar
-   - Pin Requestly for easy access
+   - Pin Override Response for easy access
 
 ### Method 2: Install from Chrome Web Store (Coming Soon)
 
@@ -60,11 +60,11 @@ The extension will be available on the Chrome Web Store once it's published.
 ### Quick Start
 
 1. **Enable the Extension**
-   - Click the Requestly icon in your toolbar
+   - Click the Override Response icon in your toolbar
    - Toggle the extension ON
 
 2. **Create Your First Rule**
-   - Right-click the Requestly icon → "Options"
+   - Right-click the Override Response icon → "Options"
    - Click "Add Rule"
    - Fill in the rule details:
      - **Name**: Descriptive name for your rule
@@ -316,8 +316,8 @@ We welcome contributions! Here's how to get started:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-repo/requestly-extension.git
-cd requestly-extension
+git clone https://github.com/your-repo/override-response-extension.git
+cd override-response-extension
 
 # Load the extension in Chrome
 # 1. Open chrome://extensions/
@@ -351,9 +351,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-repo/requestly-extension/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-repo/requestly-extension/discussions)
-- **Email**: support@requestly.io
+- **Issues**: [GitHub Issues](https://github.com/your-repo/override-response-extension/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-repo/override-response-extension/discussions)
+- **Email**: support@overrideresponse.io
 
 ## 🗺️ Roadmap
 
@@ -376,4 +376,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ for developers and QA engineers**
 
-*Requestly helps you debug faster, test better, and ship with confidence.*
+*Override Response helps you debug faster, test better, and ship with confidence.*

@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Requestly - Options</title>
+    <title>Override Response - Options</title>
     <link rel="stylesheet" href="css/options.css">
 </head>
+
 <body>
     <div class="container">
         <header class="header">
-            <h1>🔄 Requestly</h1>
+            <h1>🔄 Override Response</h1>
             <p>API Response Interceptor & Modifier</p>
             <div class="header-actions">
                 <label class="toggle-switch">
@@ -78,7 +80,7 @@
         <div id="settings" class="tab-content">
             <div class="settings-section">
                 <h2>General Settings</h2>
-                
+
                 <div class="setting-item">
                     <label for="maxLogs">Maximum Log Entries:</label>
                     <input type="number" id="maxLogs" min="100" max="10000" value="1000">
@@ -86,7 +88,8 @@
 
                 <div class="setting-item">
                     <label for="allowedDomains">Allowed Domains (one per line):</label>
-                    <textarea id="allowedDomains" placeholder="example.com&#10;api.example.com&#10;*.dev-domain.com"></textarea>
+                    <textarea id="allowedDomains"
+                        placeholder="example.com&#10;api.example.com&#10;*.dev-domain.com"></textarea>
                 </div>
 
                 <div class="setting-item">
@@ -120,7 +123,7 @@
 
                     <div class="form-section">
                         <h4>Request Matcher</h4>
-                        
+
                         <div class="form-group">
                             <label for="urlPattern">URL Pattern:</label>
                             <select id="urlType">
@@ -146,7 +149,7 @@
 
                     <div class="form-section">
                         <h4>Action</h4>
-                        
+
                         <div class="form-group">
                             <label for="actionType">Action Type:</label>
                             <select id="actionType">
@@ -216,4 +219,5 @@
 
     <script src="js/options.js"></script>
 </body>
+
 </html>

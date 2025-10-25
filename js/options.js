@@ -49,10 +49,10 @@ class OptionsPage {
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const tabId = btn.dataset.tab;
-        
+
         tabBtns.forEach(b => b.classList.remove('active'));
         tabContents.forEach(c => c.classList.remove('active'));
-        
+
         btn.classList.add('active');
         document.getElementById(tabId).classList.add('active');
 
@@ -67,7 +67,7 @@ class OptionsPage {
     try {
       const status = await this.sendMessage({ type: 'GET_STATUS' });
       document.getElementById('extensionToggle').checked = status?.isEnabled || false;
-      
+
       const rulesData = await this.sendMessage({ type: 'GET_RULES' });
       this.rules = rulesData?.rules || [];
       this.renderRules();
@@ -75,7 +75,7 @@ class OptionsPage {
       this.logs = status?.logs || [];
       this.renderLogs();
     } catch (error) {
-      console.error('Requestly Options: Failed to load data:', error);
+      console.error('Override Response Options: Failed to load data:', error);
       this.showNotification('Failed to connect to extension. Please reload the page.', 'error');
     }
   }
@@ -85,7 +85,7 @@ class OptionsPage {
       const result = await this.sendMessage({ type: 'TOGGLE_EXTENSION' });
       this.showNotification(result?.isEnabled ? 'Extension enabled' : 'Extension disabled');
     } catch (error) {
-      console.error('Requestly Options: Failed to toggle extension:', error);
+      console.error('Override Response Options: Failed to toggle extension:', error);
       this.showNotification(`Failed to toggle extension: ${error.message}`, 'error');
     }
   }
@@ -104,7 +104,7 @@ class OptionsPage {
   showEditRuleModal(rule) {
     this.currentRule = rule;
     document.getElementById('modalTitle').textContent = 'Edit Rule';
-    
+
     document.getElementById('ruleName').value = rule.name;
     document.getElementById('urlType').value = rule.matcher.url.type;
     document.getElementById('urlPattern').value = rule.matcher.url.value;
@@ -124,7 +124,7 @@ class OptionsPage {
         document.getElementById('responseBody').value = rule.action.response;
       }
     }
-    
+
     if (rule.action.delay) {
       document.getElementById('delayMs').value = rule.action.delay;
     }
@@ -139,16 +139,16 @@ class OptionsPage {
 
   updateActionUI() {
     const actionType = document.getElementById('actionType').value;
-    
-    document.getElementById('responseEditor').style.display = 
+
+    document.getElementById('responseEditor').style.display =
       actionType === 'replace' || actionType === 'status' ? 'block' : 'none';
-    
-    document.getElementById('patchEditor').style.display = 
+
+    document.getElementById('patchEditor').style.display =
       actionType === 'patch' ? 'block' : 'none';
-    
-    document.getElementById('delayEditor').style.display = 
+
+    document.getElementById('delayEditor').style.display =
       actionType === 'delay' ? 'block' : 'none';
-    
+
     if (actionType === 'replace' || actionType === 'status') {
       this.updateResponseUI();
     }
@@ -160,7 +160,7 @@ class OptionsPage {
     const customContentType = document.getElementById('customContentType');
     const formatBtn = document.getElementById('formatJsonBtn');
     const validateBtn = document.getElementById('validateBtn');
-    
+
     // Update placeholder and format button visibility
     switch (responseType) {
       case 'json':
@@ -200,7 +200,7 @@ class OptionsPage {
         validateBtn.textContent = 'Validate CSS';
         break;
     }
-    
+
     // Auto-set content-type if empty
     if (!customContentType.value) {
       customContentType.value = customContentType.placeholder;
@@ -221,7 +221,7 @@ class OptionsPage {
   loadTemplate() {
     const responseType = document.getElementById('responseType').value;
     const textarea = document.getElementById('responseBody');
-    
+
     const templates = {
       json: {
         'Success Response': '{\n  "success": true,\n  "message": "Operation completed successfully",\n  "data": {\n    "id": 123,\n    "name": "Example"\n  }\n}',
@@ -273,7 +273,7 @@ class OptionsPage {
   validateResponse() {
     const responseType = document.getElementById('responseType').value;
     const content = document.getElementById('responseBody').value.trim();
-    
+
     if (!content) {
       this.showNotification('Please enter response content', 'error');
       return;
@@ -316,17 +316,17 @@ class OptionsPage {
       <input type="text" placeholder="value" class="patch-value">
       <button type="button" class="patch-remove">×</button>
     `;
-    
+
     patchDiv.querySelector('.patch-remove').addEventListener('click', () => {
       patchDiv.remove();
     });
-    
+
     container.appendChild(patchDiv);
   }
 
   async saveRule(e) {
     e.preventDefault();
-    
+
     const formData = new FormData(e.target);
     const rule = {
       name: document.getElementById('ruleName').value,
@@ -347,11 +347,11 @@ class OptionsPage {
       const responseText = document.getElementById('responseBody').value;
       const responseType = document.getElementById('responseType').value;
       const customContentType = document.getElementById('customContentType').value;
-      
+
       if (responseText) {
         rule.action.responseType = responseType;
         rule.action.contentType = customContentType || this.getDefaultContentType(responseType);
-        
+
         if (responseType === 'json') {
           try {
             rule.action.response = JSON.parse(responseText);
@@ -404,7 +404,7 @@ class OptionsPage {
         this.showNotification(result?.error || 'Failed to save rule', 'error');
       }
     } catch (error) {
-      console.error('Requestly Options: Failed to save rule:', error);
+      console.error('Override Response Options: Failed to save rule:', error);
       this.showNotification(`Failed to save rule: ${error.message}`, 'error');
     }
   }
@@ -416,7 +416,7 @@ class OptionsPage {
           type: 'DELETE_RULE',
           ruleId
         });
-        
+
         if (result && result.success) {
           this.loadData();
           this.showNotification('Rule deleted successfully');
@@ -424,7 +424,7 @@ class OptionsPage {
           this.showNotification(result?.error || 'Failed to delete rule', 'error');
         }
       } catch (error) {
-        console.error('Requestly Options: Failed to delete rule:', error);
+        console.error('Override Response Options: Failed to delete rule:', error);
         this.showNotification(`Failed to delete rule: ${error.message}`, 'error');
       }
     }
@@ -439,7 +439,7 @@ class OptionsPage {
           ruleId,
           updates: { enabled: !rule.enabled }
         });
-        
+
         if (result && result.success) {
           this.loadData();
           this.showNotification(`Rule ${!rule.enabled ? 'enabled' : 'disabled'} successfully`);
@@ -447,7 +447,7 @@ class OptionsPage {
           this.showNotification(result?.error || 'Failed to update rule', 'error');
         }
       } catch (error) {
-        console.error('Requestly Options: Failed to toggle rule:', error);
+        console.error('Override Response Options: Failed to toggle rule:', error);
         this.showNotification(`Failed to toggle rule: ${error.message}`, 'error');
       }
     }
@@ -456,7 +456,7 @@ class OptionsPage {
   renderRules() {
     const container = document.getElementById('rulesList');
     const noRules = document.getElementById('noRules');
-    
+
     if (this.rules.length === 0) {
       container.style.display = 'none';
       noRules.style.display = 'block';
@@ -467,7 +467,7 @@ class OptionsPage {
     noRules.style.display = 'none';
 
     container.innerHTML = '';
-    
+
     this.rules.forEach(rule => {
       const ruleElement = document.createElement('div');
       ruleElement.className = `rule-item ${rule.enabled ? '' : 'disabled'}`;
@@ -508,16 +508,16 @@ class OptionsPage {
           </button>
         </div>
       `;
-      
+
       // Add event listeners
       const toggleBtn = ruleElement.querySelector('.toggle-btn');
       const editBtn = ruleElement.querySelector('.edit-btn');
       const deleteBtn = ruleElement.querySelector('.delete-btn');
-      
+
       toggleBtn.addEventListener('click', () => this.toggleRule(rule.id));
       editBtn.addEventListener('click', () => this.showEditRuleModal(rule));
       deleteBtn.addEventListener('click', () => this.deleteRule(rule.id));
-      
+
       container.appendChild(ruleElement);
     });
   }
@@ -525,14 +525,14 @@ class OptionsPage {
   filterRules() {
     const search = document.getElementById('ruleSearch').value.toLowerCase();
     const filter = document.getElementById('ruleFilter').value;
-    
+
     const filteredRules = this.rules.filter(rule => {
-      const matchesSearch = rule.name.toLowerCase().includes(search) || 
-                          rule.matcher.url.value.toLowerCase().includes(search);
-      const matchesFilter = filter === 'all' || 
-                          (filter === 'enabled' && rule.enabled) ||
-                          (filter === 'disabled' && !rule.enabled);
-      
+      const matchesSearch = rule.name.toLowerCase().includes(search) ||
+        rule.matcher.url.value.toLowerCase().includes(search);
+      const matchesFilter = filter === 'all' ||
+        (filter === 'enabled' && rule.enabled) ||
+        (filter === 'disabled' && !rule.enabled);
+
       return matchesSearch && matchesFilter;
     });
 
@@ -542,7 +542,7 @@ class OptionsPage {
   renderFilteredRules(filteredRules) {
     const container = document.getElementById('rulesList');
     const noRules = document.getElementById('noRules');
-    
+
     if (filteredRules.length === 0) {
       container.style.display = 'none';
       noRules.style.display = 'block';
@@ -553,7 +553,7 @@ class OptionsPage {
     noRules.style.display = 'none';
 
     container.innerHTML = '';
-    
+
     filteredRules.forEach(rule => {
       const ruleElement = document.createElement('div');
       ruleElement.className = `rule-item ${rule.enabled ? '' : 'disabled'}`;
@@ -594,16 +594,16 @@ class OptionsPage {
           </button>
         </div>
       `;
-      
+
       // Add event listeners
       const toggleBtn = ruleElement.querySelector('.toggle-btn');
       const editBtn = ruleElement.querySelector('.edit-btn');
       const deleteBtn = ruleElement.querySelector('.delete-btn');
-      
+
       toggleBtn.addEventListener('click', () => this.toggleRule(rule.id));
       editBtn.addEventListener('click', () => this.showEditRuleModal(rule));
       deleteBtn.addEventListener('click', () => this.deleteRule(rule.id));
-      
+
       container.appendChild(ruleElement);
     });
   }
@@ -617,7 +617,7 @@ class OptionsPage {
   renderLogs() {
     const container = document.getElementById('logsList');
     const noLogs = document.getElementById('noLogs');
-    
+
     if (this.logs.length === 0) {
       container.style.display = 'none';
       noLogs.style.display = 'block';
@@ -653,14 +653,14 @@ class OptionsPage {
   async exportRules() {
     const result = await this.sendMessage({ type: 'EXPORT_RULES' });
     const dataStr = JSON.stringify(result, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    
-    const exportFileDefaultName = 'requestly-rules.json';
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
+    const exportFileDefaultName = 'override-response-rules.json';
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
     linkElement.setAttribute('download', exportFileDefaultName);
     linkElement.click();
-    
+
     this.showNotification('Rules exported successfully');
   }
 
@@ -675,7 +675,7 @@ class OptionsPage {
     try {
       const text = await file.text();
       const data = JSON.parse(text);
-      
+
       if (!data.rules || !Array.isArray(data.rules)) {
         throw new Error('Invalid file format');
       }
@@ -694,7 +694,7 @@ class OptionsPage {
     } catch (error) {
       this.showNotification('Invalid JSON file', 'error');
     }
-    
+
     e.target.value = '';
   }
 
@@ -734,10 +734,10 @@ class OptionsPage {
       }
     }
 
-    const message = matches ? 
-      `✅ Rule matches the URL: ${url}` : 
+    const message = matches ?
+      `✅ Rule matches the URL: ${url}` :
       `❌ Rule does not match the URL: ${url}`;
-    
+
     this.showNotification(message);
   }
 
@@ -745,10 +745,10 @@ class OptionsPage {
     return new Promise((resolve, reject) => {
       chrome.runtime.sendMessage(message, (response) => {
         if (chrome.runtime.lastError) {
-          console.error('Requestly Options: Runtime error:', chrome.runtime.lastError);
+          console.error('Override Response Options: Runtime error:', chrome.runtime.lastError);
           reject(new Error(chrome.runtime.lastError.message));
         } else if (response === undefined) {
-          console.error('Requestly Options: No response from background script');
+          console.error('Override Response Options: No response from background script');
           reject(new Error('Background script not responding'));
         } else {
           resolve(response);
@@ -773,9 +773,9 @@ class OptionsPage {
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       background: ${type === 'error' ? '#f44336' : '#4caf50'};
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
       notification.remove();
     }, 3000);

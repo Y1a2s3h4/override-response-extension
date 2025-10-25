@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Minimal Requestly Test</title>
 </head>
+
 <body>
     <h1>Minimal Requestly Test</h1>
     <button onclick="testFetch()">Test Fetch</button>
     <button onclick="checkOverride()">Check Override</button>
-    
+
     <script>
         function testFetch() {
             console.log('🧪 Making test fetch...');
@@ -15,20 +17,21 @@
                 .then(r => r.json())
                 .then(data => console.log('Response:', data.title));
         }
-        
+
         function checkOverride() {
             console.log('=== OVERRIDE CHECK ===');
             console.log('Injected:', !!window.requestlyInjected);
             console.log('Rules:', window.requestlyRules?.length);
             console.log('Test function:', !!window.requestlyTestOverride);
-            
+
             if (window.requestlyTestOverride) {
                 window.requestlyTestOverride();
             }
         }
-        
+
         // Auto-check on load
         setTimeout(checkOverride, 2000);
     </script>
 </body>
+
 </html>

@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Requestly - API Response Interceptor",
+  "name": "Override Response - API Response Interceptor",
   "version": "1.0.0",
   "description": "Intercept and override API responses for debugging and testing",
   "permissions": [
@@ -20,7 +20,7 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Requestly"
+    "default_title": "Override Response"
   },
   "options_page": "options.html",
   "icons": {
